@@ -21,14 +21,24 @@ def part_1(word):
 
 def part_2(word):
     pair_of_letters = False
-    history_of_pairs = []
+    history_of_pairs_1 = []
+    history_of_pairs_2 = []
     repeat_letters = False
 
     for i in range(0, len(word)):
-        if 1 <= i <= (len(word) - 2) and word[i] != word[i - 1]:
-            if (word[i] + word[i + 1]) in history_of_pairs:
+        if i <= (len(word) - 2):
+            if i >= 1 and word[i] != word[i - 1] and ((word[i] + word[i + 1]) in history_of_pairs_1 or (word[i] + word[i + 1]) in history_of_pairs_2):
                 pair_of_letters = True
-            history_of_pairs.append(word[i] + word[i + 1])
+            else:
+                if i % 2 == 0 and (word[i] + word[i + 1]) in history_of_pairs_1:
+                    pair_of_letters = True
+                elif i % 2 != 0 and (word[i] + word[i + 1]) in history_of_pairs_2:
+                    pair_of_letters = True
+
+            if i % 2 == 0:
+                history_of_pairs_1.append(word[i] + word[i + 1])
+            else:
+                history_of_pairs_2.append(word[i] + word[i + 1])
 
         if i <= (len(word) - 3):
             if word[i] == word[i + 2]:
