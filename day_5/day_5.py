@@ -27,8 +27,9 @@ def part_2(word):
 
     for i in range(0, len(word)):
         if i <= (len(word) - 2):
-            if i >= 1 and word[i] != word[i - 1] and ((word[i] + word[i + 1]) in history_of_pairs_1 or (word[i] + word[i + 1]) in history_of_pairs_2):
-                pair_of_letters = True
+            if word[i] != word[i + 1]:
+                if (word[i] + word[i + 1]) in history_of_pairs_1 or (word[i] + word[i + 1]) in history_of_pairs_2:
+                    pair_of_letters = True
             else:
                 if i % 2 == 0 and (word[i] + word[i + 1]) in history_of_pairs_1:
                     pair_of_letters = True
@@ -44,22 +45,23 @@ def part_2(word):
             if word[i] == word[i + 2]:
                 repeat_letters = True
 
-    if pair_of_letters and repeat_letters:
-        return True
+        if pair_of_letters and repeat_letters:
+            return True
+            break
 
 
 def main():
     with open("input.txt", "r") as file_input:
         nice_strings = 0
         for line in file_input:
-            if part_1(line):
+            if part_1(line.strip('\n')):
                 nice_strings += 1
-        #print(nice_strings)
+        print(nice_strings)
 
     with open("input.txt", "r") as file_input:
         nice_strings_2 = 0
         for line in file_input:
-            if part_2(line):
+            if part_2(line.strip('\n')):
                 nice_strings_2 += 1
         print(nice_strings_2)
 
