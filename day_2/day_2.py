@@ -14,6 +14,7 @@ def part_2(l, w, h):
     total_length = 2 * (list_1[0] + list_1[1]) + l * w * h
     return total_length
 
+
 def main():
     with open("input.txt", "r") as file_input:
         pattern = re.compile(
